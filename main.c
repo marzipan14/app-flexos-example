@@ -125,6 +125,11 @@ int main(int __unused argc, char __unused *argv[])
 	flexos_gate(libc, printf, "Printing my shared stack ints: %d %d %d %d\n",
 		stack_int, stack_int2, stack_int3, stack_int4);
 
+	flexos_gate(libc, printf, "Trying to execute a function without a gate...");
+
+	perform_sensitive_operation();
+
+
 	flexos_gate(libc, printf, "Now executing an invalid cross-compartment access: THIS SHOULD CRASH NOW.\n");
 	/* static_app_secret should not be accessible from the other domain */
 	flexos_gate_r(libflexosexample, ret, function1, static_app_secret);
